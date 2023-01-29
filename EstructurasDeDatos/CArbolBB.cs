@@ -213,14 +213,25 @@
                 return null;
             else
                 if (EsHijo(pRaiz))
-                return this;
-            else
+                    return this;
+                else
                     if (pRaiz.ToString().CompareTo(aRaiz.ToString()) < 0)
-                return aSubArbolIzq != null ? aSubArbolIzq.Padre(pRaiz) : null;
-            else
-                return aSubArbolDer != null ? aSubArbolDer.Padre(pRaiz) : null;
+                        return aSubArbolIzq != null ? aSubArbolIzq.Padre(pRaiz) : null;
+                    else
+                        return aSubArbolDer != null ? aSubArbolDer.Padre(pRaiz) : null;
         }
-
+        public object? BuscarNodo(object Elemento)
+        {
+            CArbolBB NodoPadre = Padre(Elemento);
+            if (NodoPadre == null)
+                return null;
+            else if (NodoPadre.Raiz.Equals(Elemento))
+                return NodoPadre.Raiz;
+            else if (Elemento.ToString().CompareTo(NodoPadre.Raiz.ToString()) < 0)
+                return aSubArbolIzq.Raiz;
+            else
+                return aSubArbolDer.Raiz;
+        }
         /* -------------------------------------------------------------- */
         public bool EsHijo(object pRaiz)
         {
