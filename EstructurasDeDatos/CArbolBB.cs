@@ -335,6 +335,7 @@
                 Cola.Retirar();
                 // ----- Procesar raiz
                 Procesar(ArbolAux.Raiz, Modulo);
+                newCola.PonerEnCola(ArbolAux.Raiz);
                 // ----- Agregar hijos a la cola, si existen
                 if (ArbolAux.SubArbolIzq != null)
                     Cola.PonerEnCola(ArbolAux.SubArbolIzq);
