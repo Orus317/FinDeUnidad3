@@ -73,7 +73,7 @@
 				return (Math.Abs(Altura1-Altura2)<2);
 			}
         */
-
+        #region Metodos trascendentales
         /* -------------------------------------------------------------- */
         protected void RotacionSimpleIzq(bool FlagFE = true)
         {
@@ -160,6 +160,7 @@
         }
 
         /* -------------------------------------------------------------- */
+        #endregion
         public int Agregar(object Elemento)
         {
             int Ind = 0;
@@ -221,7 +222,6 @@
             return Ind;
         }
 
-        /* -------------------------------------------------------------- */
         public void PreOrdenFE()
         {
             if (Raiz != null)
@@ -236,6 +236,6 @@
                     (SubArbolDer as CArbolAVL).PreOrdenFE();
             }
         }
-        #endregion Metodos
+        #endregion 
     }
 }

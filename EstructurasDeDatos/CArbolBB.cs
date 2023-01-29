@@ -176,13 +176,11 @@
                     // ----- Verificar si el elemento a eliminar esta en el hijo Izq
                     if (pRaiz.ToString().CompareTo(aRaiz.ToString()) < 0)
                     {
-                        if (aSubArbolIzq != null)
-                            aSubArbolIzq.Eliminar(pRaiz);
+                        aSubArbolIzq?.Eliminar(pRaiz);
                     }
                     else // ----- Elemento a eliminar esta en el hijo Der
                     {
-                        if (aSubArbolDer != null)
-                            aSubArbolDer.Eliminar(pRaiz);
+                        aSubArbolDer?.Eliminar(pRaiz);
                     }
                 }
                 // Eliminar hojas vacías, verificando si los hijos son hojas vacias 
@@ -269,64 +267,7 @@
         }
 
         /* -------------------------------------------------------------- */
-        public void Procesar(object Elem, Action<object> Modulo = null)
-        {
-            if (Modulo != null)
-                Modulo(Elem);
-            else
-                Console.WriteLine(Elem.ToString());
-        }
-
-        /* -------------------------------------------------------------- */
-        public void PreOrden(Action<object> Modulo = null)
-        {
-            if (aRaiz != null)
-            {
-                // ----- Procesar la raiz
-                Procesar(aRaiz, Modulo);
-                // ----- Procesar hijo Izq 
-                if (aSubArbolIzq != null)
-                    aSubArbolIzq.PreOrden(Modulo);
-                // ----- Procesar hijo Der 
-                if (aSubArbolDer != null)
-                    aSubArbolDer.PreOrden(Modulo);
-            }
-        }
-
-        /* -------------------------------------------------------------- */
-        public void InOrden(Action<object> Modulo = null)
-        {
-            if (aRaiz != null)
-            {
-                // ----- Procesar hijo Izq 
-                if (aSubArbolIzq != null)
-                    aSubArbolIzq.InOrden(Modulo);
-                // ----- Procesar la raiz
-                Procesar(aRaiz, Modulo);
-                // ----- Procesar hijo Der 
-                if (aSubArbolDer != null)
-                    aSubArbolDer.InOrden(Modulo);
-            }
-        }
-
-        /* -------------------------------------------------------------- */
-        public void PostOrden(Action<object> Modulo = null)
-        {
-            if (aRaiz != null)
-            {
-                // ----- Procesar hijo Izq 
-                if (aSubArbolIzq != null)
-                    aSubArbolIzq.PostOrden(Modulo);
-                // ----- Procesar hijo Der 
-                if (aSubArbolDer != null)
-                    aSubArbolDer.PostOrden(Modulo);
-                // ----- Procesar la raiz
-                Procesar(aRaiz, Modulo);
-            }
-        }
-
-        /* -------------------------------------------------------------- */
-        public void RecorrerCola(cCola Cola, Action<object> Modulo = null)
+        public void RecorrerCola(CCola Cola, CCola ColaAcumulativa)
         {
             if (!Cola.EsVacia())
             {
@@ -334,35 +275,38 @@
                 CArbolBB ArbolAux = Cola.Primero() as CArbolBB;
                 Cola.Retirar();
                 // ----- Procesar raiz
-                Procesar(ArbolAux.Raiz, Modulo);
-                newCola.PonerEnCola(ArbolAux.Raiz);
+
+                ColaAcumulativa.PonerEnCola(ArbolAux.Raiz);
                 // ----- Agregar hijos a la cola, si existen
                 if (ArbolAux.SubArbolIzq != null)
                     Cola.PonerEnCola(ArbolAux.SubArbolIzq);
                 if (ArbolAux.SubArbolDer != null)
                     Cola.PonerEnCola(ArbolAux.SubArbolDer);
                 // ----- Recorrer Cola
-                RecorrerCola(Cola, Modulo);
+                RecorrerCola(Cola, ColaAcumulativa);
             }
 
         }
 
         /* -------------------------------------------------------------- */
-        public void RecorridoPorNiveles(Action<object> Modulo = null)
+        public CCola? GenerarColaDeElementos()
         {
             if (aRaiz != null)
             {
-                // ----- Crear Cola
-                cCola Cola = new cCola();
+                CCola colaAcumulativa = CCola.Crear();
+                //-----Crear Cola
+                CCola Cola = new();
                 // ----- Agregar Raiz a la cola
                 Cola.PonerEnCola(this);
                 // ----- Recorrer Cola
-                RecorrerCola(Cola, Modulo);
+                RecorrerCola(Cola, colaAcumulativa);
+                return colaAcumulativa;
             }
+            return null;
+            /* -------------------------------------------------------------- */
 
+            #endregion Metodos
         }
-
-        /* -------------------------------------------------------------- */
         public int NroNodos()
         {
             if (EstaVacio())
@@ -370,7 +314,5 @@
             else
                 return 1 + (aSubArbolIzq == null ? 0 : aSubArbolIzq.NroNodos()) + (aSubArbolDer == null ? 0 : aSubArbolDer.NroNodos());
         }
-
-        #endregion Metodos
     }
 }
