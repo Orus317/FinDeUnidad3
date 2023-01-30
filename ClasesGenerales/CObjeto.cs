@@ -4,7 +4,6 @@
     {
         #region  ATRIBUTOS 
         private string? _Id;
-
         public string? Id { get => _Id; set => _Id = value; }
         #endregion
 

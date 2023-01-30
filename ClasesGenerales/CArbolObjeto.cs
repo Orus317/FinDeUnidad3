@@ -72,15 +72,22 @@ namespace ClasesGenerales
                 // Se muestran los elementos en pantalla
                 while (!Cola.EsVacia())
                 {
-                    Console.WriteLine(Cola.Primero());
+                    if (deProcesarObjeto != null)
+                        deProcesarObjeto(Cola.Primero());
+                    else 
+                        Console.WriteLine(Cola.Primero());
                     Cola.Retirar();
                 }
             }
         }
         // ==============================================================
-        public void Eliminar(CObjeto Objeto)
+        public void Eliminar(object Objeto)
         {
             Arbol.Eliminar(Objeto);
+        }
+        public object Buscar(object Objeto)
+        {
+            return Arbol.BuscarNodo(Objeto);
         }
         #endregion
     }
