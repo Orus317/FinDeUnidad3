@@ -139,7 +139,7 @@
         /* -------------------------------------------------------------- */
         private void EliminarNodoConDosHijos()
         {
-            Object RaizAux = aRaiz;
+            object RaizAux = aRaiz;
             aRaiz = aSubArbolDer.Minimo();
             aSubArbolDer.Eliminar(RaizAux);
         }
@@ -162,7 +162,7 @@
         }
 
         /* -------------------------------------------------------------- */
-        public virtual void Eliminar(Object pRaiz)
+        public virtual void Eliminar(object pRaiz)
         {
             if (EstaVacio())
                 Console.WriteLine("ERROR. Elemento no encontrado...");
@@ -223,6 +223,7 @@
         public object? BuscarNodo(object Elemento)
         {
             CArbolBB NodoPadre = Padre(Elemento);
+            //return NodoP
             if (NodoPadre == null)
                 return null;
             else if (NodoPadre.Raiz.Equals(Elemento))
