@@ -139,9 +139,9 @@
         /* -------------------------------------------------------------- */
         private void EliminarNodoConDosHijos()
         {
-            object RaizAux = aRaiz;
+            //object RaizAux = aRaiz;
             aRaiz = aSubArbolDer.Minimo();
-            aSubArbolDer.Eliminar(RaizAux);
+            aSubArbolDer.Eliminar(aRaiz);
         }
 
         /* -------------------------------------------------------------- */
@@ -169,7 +169,7 @@
             else
             {
                 // ----- Verificar si la raiz es el elemento que se desea eliminar
-                if (pRaiz.Equals(aRaiz))
+                if (pRaiz.Equals(aRaiz.ToString()))
                     EliminarNodo();
                 else
                 {
