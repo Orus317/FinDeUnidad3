@@ -25,7 +25,7 @@ namespace AppElecciones
             Console.WriteLine("4. Buscar (código)");
             Console.WriteLine("5. Salir ");
             Console.WriteLine();
-            Console.Write(" -- Ingrese la opción");
+            Console.Write(" -- Ingrese la opción: ");
             Ejecutar(ArbolDePartidos);
         }
         public void Ejecutar(CArbolPartido ArbolDePartidos)
@@ -33,7 +33,7 @@ namespace AppElecciones
             int Opcion;
             do
             {
-                Opcion = Utilidades.ValidarEntero("Debe ingresar un número entre 1 y 5", 1, 5);
+                Opcion = Utilidades.ValidarEntero("Debe ingresar un número positivo", 1, int.MaxValue);
                 switch (Opcion)
                 {
                     case 1:
@@ -48,10 +48,11 @@ namespace AppElecciones
                     case 4:
                         ArbolDePartidos.Buscar();
                         break;
-                    default:
+                    default:    
                         break;
                 }
-            } while (0 < Opcion && Opcion < 6);
+                Menu();
+            } while (0 < Opcion && Opcion < 5);
         }
     }
 }
