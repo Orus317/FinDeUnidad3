@@ -169,7 +169,7 @@
             else
             {
                 // ----- Verificar si la raiz es el elemento que se desea eliminar
-                if (pRaiz.Equals(aRaiz.ToString()))
+                if ((pRaiz.ToString()).Equals(aRaiz.ToString()))
                     EliminarNodo();
                 else
                 {
@@ -319,6 +319,7 @@
 
             #endregion Metodos
         }
+        /* -------------------------------------------------------------- */
         public int NroNodos()
         {
             if (EstaVacio())
@@ -326,5 +327,6 @@
             else
                 return 1 + (aSubArbolIzq == null ? 0 : aSubArbolIzq.NroNodos()) + (aSubArbolDer == null ? 0 : aSubArbolDer.NroNodos());
         }
+        /* -------------------------------------------------------------- */
     }
 }

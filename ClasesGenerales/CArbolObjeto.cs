@@ -43,7 +43,6 @@ namespace ClasesGenerales
         }
 
         // ==============================================================
-        #region HAY QUE REFACTORIZAR Y ADAPTAR ESTE MODULO (Generar sub arbol)=======
         public virtual CArbolAVL GenerarSubArbolAVL()
         {
             // ----- Generar arbol vacio
@@ -61,7 +60,6 @@ namespace ClasesGenerales
             //-----Retornar sub arbol
             return ArbolFiltrado;
         }
-        #endregion
         // ==============================================================
         public virtual void Listar()
         {
@@ -80,6 +78,10 @@ namespace ClasesGenerales
                 }
             }
         }
+        public CCola GenerarColaDeElementos()
+        {
+            return Arbol.GenerarColaDeElementos();
+        }
         // ==============================================================
         public void Eliminar(object Objeto)
         {
@@ -88,6 +90,18 @@ namespace ClasesGenerales
         public object Buscar(object Objeto)
         {
             return Arbol.BuscarNodo(Objeto);
+        }
+        public object Minimo()
+        {
+            return Arbol.Minimo();
+        }
+        public bool EstaVacio()
+        {
+            return Arbol.EstaVacio();
+        }
+        public bool EstaBalanceado()
+        {
+            return Arbol.EstaBalanceado();
         }
         #endregion
     }

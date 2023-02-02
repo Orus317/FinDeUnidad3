@@ -1,10 +1,15 @@
 ﻿using ClasesGenerales;
+using EstructurasDeDatos;
 
 namespace AppElecciones
 {
     public class CArbolPartido : CArbolObjeto
     {
         public CArbolPartido() : base() { }
+        public void Agregar(object Obj)
+        {
+            base.Agregar(Obj);
+        }
         public void Agregar()
         {
             CPartido _ = new();
@@ -30,7 +35,11 @@ namespace AppElecciones
                     Partido.Mostrar();
             };
             base.Listar();
-        }   
+        }
+        public override CArbolAVL GenerarSubArbolAVL()
+        {
+            return base.GenerarSubArbolAVL();
+        }
         public void Buscar()
         {
             Console.Write("Escriba el ID del partido que busca: ");
@@ -40,6 +49,5 @@ namespace AppElecciones
             else
                 Console.WriteLine("No se encontró el elemento");
         }
-
     }
 }

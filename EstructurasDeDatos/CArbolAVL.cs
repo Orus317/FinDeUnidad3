@@ -65,14 +65,14 @@
         #region ====================   Metodos    ====================== 
 
         /* -------------------------------------------------------------- */
-        /*
-			private bool EstaBalanceado()
-			{
-				int Altura1 = (SubArbolIzq==null ? 0 :1+SubArbolIzq.Altura()); 
-				int Altura2 = (SubArbolDer==null ? 0 :1+SubArbolDer.Altura()); 
-				return (Math.Abs(Altura1-Altura2)<2);
-			}
-        */
+
+        public bool EstaBalanceado()
+        {
+            int Altura1 = (SubArbolIzq == null ? 0 : 1 + SubArbolIzq.Altura());
+            int Altura2 = (SubArbolDer == null ? 0 : 1 + SubArbolDer.Altura());
+            return (Math.Abs(Altura1 - Altura2) < 2);
+        }
+
         #region Metodos trascendentales
         /* -------------------------------------------------------------- */
         protected void RotacionSimpleIzq(bool FlagFE = true)
@@ -168,58 +168,58 @@
                 Raiz = Elemento;
             else
                 if (Elemento.ToString().CompareTo(Raiz.ToString()) < 0)
-            {   // Agregar el nuevo elemento como hijo Izq
-                if (SubArbolIzq == null)
-                {
-                    SubArbolIzq = CArbolAVL.CrearAVL(null, Elemento, null);
-                    aFE--;
-                    Ind = 1;
-                }
-                else
-                {
-                    Ind = (SubArbolIzq as CArbolAVL).Agregar(Elemento);
-                    if (Ind != 0)
+                {// Agregar el nuevo elemento como hijo Izq
+                    if (SubArbolIzq == null)
                     {
-                        aFE -= Ind;
-                        // Balancear arbol si esta desbalanceado 
-                        if (aFE == -2) // Si el Factor de equilibrio es -2 entonces hay desbalance
+                        SubArbolIzq = CArbolAVL.CrearAVL(null, Elemento, null);
+                        aFE--;
+                        Ind = 1;
+                    }
+                    else
+                    {
+                        Ind = (SubArbolIzq as CArbolAVL).Agregar(Elemento);
+                        if (Ind != 0)
                         {
-                            if (Elemento.ToString().CompareTo(SubArbolIzq.Raiz.ToString()) < 0)
-                                RotacionSimpleIzq();
-                            else
-                                RotacionDobleIzq(Elemento);
-                            Ind = 0;
+                            aFE -= Ind;
+                            // Balancear arbol si esta desbalanceado 
+                            if (aFE == -2) // Si el Factor de equilibrio es -2 entonces hay desbalance
+                            {
+                                if (Elemento.ToString().CompareTo(SubArbolIzq.Raiz.ToString()) < 0)
+                                    RotacionSimpleIzq();
+                                else
+                                    RotacionDobleIzq(Elemento);
+                                Ind = 0;
+                            }
                         }
                     }
                 }
-            }
-            else
-            {   // Agregar el nuevo elemento como hijo Der
-                if (SubArbolDer == null)
-                {
-                    SubArbolDer = CArbolAVL.CrearAVL(null, Elemento, null);
-                    aFE++;
-                    Ind = 1;
-                }
                 else
-                {
-                    Ind = (SubArbolDer as CArbolAVL).Agregar(Elemento);
-                    if (Ind != 0)
+                {   // Agregar el nuevo elemento como hijo Der
+                    if (SubArbolDer == null)
                     {
+                        SubArbolDer = CArbolAVL.CrearAVL(null, Elemento, null);
                         aFE++;
-                        // Balancear arbol si esta desbalanceado 
-                        if (aFE == 2)
+                        Ind = 1;
+                    }
+                    else
+                    {
+                        Ind = (SubArbolDer as CArbolAVL).Agregar(Elemento);
+                        if (Ind != 0)
                         {
-                            if (Elemento.ToString().CompareTo(SubArbolDer.Raiz.ToString()) > 0)
-                                RotacionSimpleDer();
-                            else
-                                RotacionDobleDer(Elemento);
-                            Ind = 0;
+                            aFE++;
+                            // Balancear arbol si esta desbalanceado 
+                            if (aFE == 2)
+                            {
+                                if (Elemento.ToString().CompareTo(SubArbolDer.Raiz.ToString()) > 0)
+                                    RotacionSimpleDer();
+                                else
+                                    RotacionDobleDer(Elemento);
+                                Ind = 0;
+                            }
                         }
                     }
                 }
-            }
-            return Ind;
+        return Ind;
         }
 
         public void PreOrdenFE()
@@ -235,6 +235,10 @@
                 if (SubArbolDer != null)
                     (SubArbolDer as CArbolAVL).PreOrdenFE();
             }
+        }
+        public override void Eliminar(object pRaiz)
+        {
+            base.Eliminar(pRaiz);
         }
         #endregion 
     }
