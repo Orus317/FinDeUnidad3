@@ -1,11 +1,12 @@
-﻿using ClasesGenerales;
-using EstructurasDeDatos;
+﻿using EstructurasDeDatos;
+using ClasesGenerales;
 
 namespace AppElecciones
 {
     public class CArbolPartido : CArbolObjeto
     {
         public CArbolPartido() : base() { }
+        public CArbolPartido(CArbolAVL Arbol) : base(Arbol) { }
         public void Agregar(object Obj)
         {
             base.Agregar(Obj);
@@ -16,7 +17,7 @@ namespace AppElecciones
             _.Registrar();
             base.Agregar(_);
         }
-        public void Agregar(string idPartido, string nombrePartido,string idRepresentante, int nroFirmasPresentadas, int nroFirmasValidas)
+        public void Agregar(string idPartido, string nombrePartido, string idRepresentante, int nroFirmasPresentadas, int nroFirmasValidas)
         {
             CPartido _ = new(idPartido, nombrePartido, idRepresentante, nroFirmasPresentadas, nroFirmasValidas);
             base.Agregar(_);
@@ -48,6 +49,35 @@ namespace AppElecciones
                 Partido.Mostrar();
             else
                 Console.WriteLine("No se encontró el elemento");
+        }
+
+        public void PartidoPorDni()
+        {
+            Console.Write("DNI del representante: ");
+            string dni = Console.ReadLine();
+            deProcesarObjeto = delegate (object Objeto)
+            {
+                if (Objeto is CPartido Partido)
+                {
+                    if (Partido.Representante() == dni)
+                        Partido.Mostrar();
+                }
+            };
+            base.Listar();
+        }
+
+        public void nroFirmasValidasMayoraN()
+        {
+            Console.Write("Ingrese un número: ");
+            int N = int.Parse(Console.ReadLine());
+            deSeleccionarObjeto = delegate (object o)
+            {
+                CPartido _ = (CPartido)o;
+                return _.NroFirmasValidas >= N;
+            };
+            CArbolAVL _ = GenerarSubArbolAVL();
+            CArbolPartido SubArbol = new(_);
+            SubArbol.Listar();
         }
     }
 }
