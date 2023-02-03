@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AppElecciones\AppElecciones.csproj" />
+    <ProjectReference Include="../ClasesGenerales/ClasesGenerales.csproj" />
   </ItemGroup>
 
 </Project>
