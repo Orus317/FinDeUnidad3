@@ -38,11 +38,13 @@ namespace AppElecciones
                     ArbolPartido.nroFirmasValidasMayoraN();
                     break;
                 case 2:
+                    CReportes.ListarPartidosPorOrdenDescendenteDeFirmas(ArbolPartido);
                     break;
                 case 3:
                     ArbolPartido.PartidoPorDni();
                     break;
                 case 4:
+                    CReportes.ListarPartidosConVallaDeVotos(ArbolPartido);
                     break;
                 case 5:
                     CMenu.MostrarMenu(Partido, Representante, ArbolPartido);
