@@ -73,7 +73,7 @@ namespace AppElecciones
             deSeleccionarObjeto = delegate (object o)
             {
                 CPartido _ = (CPartido)o;
-                return _.NroFirmasValidas >= N;
+                return _.NroFirmasValidas >= N; 
             };
             CArbolAVL _ = GenerarSubArbolAVL();
             CArbolPartido SubArbol = new(_);

@@ -1,6 +1,5 @@
 ﻿using AppElecciones;
-using EstructurasDeDatos;
-using ClasesGenerales;
+
 
 #region Partidos predeterminados
 // Falta implementar una verificación de representantes por lo que se usarán datos fútiles
@@ -32,5 +31,5 @@ Representantes.Agregar("120", "Do Santos", "Cuchitini", "Antonella", "23478535",
 #endregion
 
 CControlRepresentante nuevoControl_Representantes = new(Representantes);
-CControlPartido nuevoControl_Partido = new(ArbolPartido);
+CControlPartido nuevoControl_Partido = new(ArbolPartido);   
 CMenu.MostrarMenu(nuevoControl_Partido, nuevoControl_Representantes, ArbolPartido);
