@@ -77,6 +77,12 @@ namespace AppElecciones
             return base.Equals(Objeto);
         }
 
+        public string Representante(){
+            return IdRepresentante;
+        } 
+        public string Partido(){
+            return Nombre;
+        }
         #endregion
     }
 }
