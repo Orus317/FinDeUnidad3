@@ -1,4 +1,5 @@
 ﻿using ClasesGenerales;
+using EstructurasDeDatos;
 
 namespace AppElecciones
 {
@@ -11,21 +12,24 @@ namespace AppElecciones
         private string? _IdRepresentante;
         private int? _NroFirmasPresentadas;
         private int? _NroFirmasValidas;
+        private CArbolRepresentante? _ArbolRepresentante;
         #endregion
         #region Propiedades
         public string? Nombre { get => _Nombre; set => _Nombre = value; }
         public string? IdRepresentante { get => _IdRepresentante; set => _IdRepresentante = value; }
         public int? NroFirmasPresentadas { get => _NroFirmasPresentadas; set => _NroFirmasPresentadas = value; }
         public int? NroFirmasValidas { get => _NroFirmasValidas; set => _NroFirmasValidas = value; }
+        public CArbolRepresentante? ArbolRepresentante { get => _ArbolRepresentante; set => _ArbolRepresentante = value; }
         #endregion
         #region Constructores
-        public CPartido(string? idPartido, string? nombre, string? idRepresentante, int? nroFirmasPresentadas, int? nroFirmasValidas)
+        public CPartido(string? idPartido, string? nombre, string? idRepresentante, int? nroFirmasPresentadas, int? nroFirmasValidas, CArbolRepresentante arbolRepresentante)
         {
             Id = idPartido;
             Nombre = nombre;
-            IdRepresentante = idRepresentante;
+            IdRepresentante = VerificarIdRepresentante(idRepresentante, arbolRepresentante) ? idRepresentante : "";
             NroFirmasPresentadas = nroFirmasPresentadas;
             NroFirmasValidas = nroFirmasValidas;
+            ArbolRepresentante = arbolRepresentante;
         }
         public CPartido()
         {
@@ -46,6 +50,12 @@ namespace AppElecciones
             Nombre = Console.ReadLine();
             Console.Write("Id del representante: ");
             IdRepresentante = Console.ReadLine();
+            while (!VerificarIdRepresentante(IdRepresentante, ArbolRepresentante))
+            {
+                Console.WriteLine("-- No existe dicho id de representante en el árbol de representantes. Ingrese nuevamente el id");
+                Console.Write("Id del representante: ");
+                IdRepresentante = Console.ReadLine();
+            }
             Console.Write("Número de firmas presentadas: ");
             NroFirmasPresentadas = Utilidades.ValidarEntero("Debe ser un número positivo", 1, int.MaxValue);
             Console.Write("Número de firmas válidas: ");
@@ -83,6 +93,20 @@ namespace AppElecciones
         public string Partido(){
             return Nombre;
         }
+        private bool VerificarIdRepresentante(string idRepresentante, CArbolRepresentante arbolRepresentante)
+        {
+            CCola cola = arbolRepresentante.GenerarColaDeElementos();
+            if (!cola.EsVacia())
+            {
+                if (cola.Primero() is CRepresentante Representante && (Representante.Id == idRepresentante || Representante.Dni == idRepresentante))
+                {
+                    return true;
+                }
+                cola.Retirar();
+            }
+            return false;
+        }
+
         #endregion
     }
 }

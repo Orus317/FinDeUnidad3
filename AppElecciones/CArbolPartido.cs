@@ -17,9 +17,9 @@ namespace AppElecciones
             _.Registrar();
             base.Agregar(_);
         }
-        public void Agregar(string idPartido, string nombrePartido, string idRepresentante, int nroFirmasPresentadas, int nroFirmasValidas)
+        public void Agregar(string idPartido, string nombrePartido, string idRepresentante, int nroFirmasPresentadas, int nroFirmasValidas, CArbolRepresentante arbolRepresentante)
         {
-            CPartido _ = new(idPartido, nombrePartido, idRepresentante, nroFirmasPresentadas, nroFirmasValidas);
+            CPartido _ = new(idPartido, nombrePartido, idRepresentante, nroFirmasPresentadas, nroFirmasValidas, arbolRepresentante);
             base.Agregar(_);
         }
         public void Eliminar()

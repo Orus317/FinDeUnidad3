@@ -1,21 +1,6 @@
 ﻿using AppElecciones;
 
 
-#region Partidos predeterminados
-// Falta implementar una verificación de representantes por lo que se usarán datos fútiles
-CArbolPartido ArbolPartido = new();
-ArbolPartido.Agregar(new CPartido("P01", "Partido1", "R001", 1200, 900));
-ArbolPartido.Agregar(new CPartido("P01", "Partido2", "R002", 900, 800));
-ArbolPartido.Agregar(new CPartido("P03", "Partido3", "R003", 1800, 1700));
-ArbolPartido.Agregar(new CPartido("P04", "Partido4", "R004", 1000, 700));
-ArbolPartido.Agregar(new CPartido("P05", "Partido5", "R005", 100, 40));
-ArbolPartido.Agregar(new CPartido("P06", "Partido6", "R006", 700, 400));
-ArbolPartido.Agregar(new CPartido("P07", "Partido7", "R007", 600, 200));
-ArbolPartido.Agregar(new CPartido("P08", "Partido8", "R008", 100, 100));
-ArbolPartido.Agregar(new CPartido("P09", "Partido9", "R009", 2000, 1200));
-ArbolPartido.Agregar(new CPartido("P010", "Partid10", "R010", 1200, 1100));
-#endregion
-
 #region Representantes predeterminados
 CArbolRepresentante Representantes = new();
 Representantes.Agregar("111", "Ramirez", "Lastra", "Alberto", "95961212", "Av. Brasil");
@@ -28,6 +13,20 @@ Representantes.Agregar("117", "Espinoza", "Ramirez", "Ian", "82784817", "Av. Lim
 Representantes.Agregar("118", "Mamamni", "Brenner", "Wilse", "01278535", "Av. 2 de mayo");
 Representantes.Agregar("119", "Suarez", "Cavani", "Horus", "01278535", "Av. La Cultura");
 Representantes.Agregar("120", "Do Santos", "Cuchitini", "Antonella", "23478535", "Av. Pallar");
+#endregion
+
+#region Partidos predeterminados
+CArbolPartido ArbolPartido = new();
+ArbolPartido.Agregar("P01", "Acción Popular", "111", 1200, 900, Representantes);
+ArbolPartido.Agregar("P01", "Fuerza Popular", "112", 900, 800, Representantes);
+ArbolPartido.Agregar("P03", "Renovación Popular", "113", 1800, 1700, Representantes);
+ArbolPartido.Agregar("P04", "Paloma Popular", "114", 1000, 700, Representantes);
+ArbolPartido.Agregar("P05", "Perú Libre", "115", 100, 40, Representantes);
+ArbolPartido.Agregar("P06", "Pueblo Libre", "116", 700, 400, Representantes);
+ArbolPartido.Agregar("P07", "País Libre", "117", 600, 200, Representantes);
+ArbolPartido.Agregar("P08", "APRA", "118", 100, 100, Representantes);
+ArbolPartido.Agregar("P09", "FREDEMO", "119", 2000, 1200, Representantes);
+ArbolPartido.Agregar("P010", "UE", "120", 1200, 1100, Representantes);
 #endregion
 
 CControlRepresentante nuevoControl_Representantes = new(Representantes);
