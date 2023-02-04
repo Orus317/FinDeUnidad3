@@ -21,7 +21,7 @@ namespace AppElecciones
             Direccion = direccion;
         }
 
-        public CRepresentante( )
+        public CRepresentante()
         {
             Id = null;
             ApellidoPaterno = null;
@@ -67,7 +67,8 @@ namespace AppElecciones
             if ( Objeto is CRepresentante Representante)
             {
                 return Representante.Id == Id;
-            } else if ( Objeto is string id)
+            }
+            else if ( Objeto is string id)
             {
                 return Id == id;
             }
