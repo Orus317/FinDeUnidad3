@@ -13,7 +13,7 @@ namespace AppElecciones
         }
         public void Agregar(string idRepresentante, string apellidoPaterno, string apellidoMaterno, string nombres, string dni, string direccion  )
         {
-            CRepresentante _ = new(idRepresentante, apellidoMaterno, apellidoMaterno, nombres, dni, direccion);
+            CRepresentante _ = new(idRepresentante, apellidoPaterno, apellidoMaterno, nombres, dni, direccion);
             base.Agregar(_);
         }
         public void Eliminar()

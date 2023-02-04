@@ -27,7 +27,7 @@ namespace AppElecciones
             Console.WriteLine();
             Console.Write(" -- Ingrese la opción: ");
         }
-        public void EjecutarMenu()
+        public void EjecutarMenu(CArbolRepresentante arbolRepresentante)
         {
             int Opcion;
             do
@@ -37,7 +37,7 @@ namespace AppElecciones
                 switch (Opcion)
                 {
                 case 1:
-                    ArbolDePartidos.Agregar();
+                    ArbolDePartidos.Agregar(arbolRepresentante);
                     break;
                 case 2:
                     ArbolDePartidos.Eliminar();

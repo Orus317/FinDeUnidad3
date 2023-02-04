@@ -11,9 +11,10 @@ namespace AppElecciones
         {
             base.Agregar(Obj);
         }
-        public void Agregar()
+        public void Agregar(CArbolRepresentante arbolRepresentante)
         {
             CPartido _ = new();
+            _.ArbolRepresentante = arbolRepresentante;
             _.Registrar();
             base.Agregar(_);
         }

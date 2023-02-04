@@ -15,7 +15,7 @@ namespace AppElecciones
             Console.Write(" -- Ingrese la opción: ");
         }
 
-        public static void EjecutarMenu(CControlPartido partido, CControlRepresentante representante, CArbolPartido ArbolPartido)
+        public static void EjecutarMenu(CControlPartido partido, CControlRepresentante representante, CArbolPartido ArbolPartido, CArbolRepresentante arbolRepresentante)
         {
             int opcion = -1;
             do
@@ -25,7 +25,7 @@ namespace AppElecciones
                 switch (opcion)
                 {
                 case 1:
-                    partido.EjecutarMenu();
+                    partido.EjecutarMenu(arbolRepresentante);
                     break;
                 case 2:
                     representante.EjecutarMenu();

@@ -18,7 +18,7 @@ Representantes.Agregar("120", "Do Santos", "Cuchitini", "Antonella", "23478535",
 #region Partidos predeterminados
 CArbolPartido ArbolPartido = new();
 ArbolPartido.Agregar("P01", "Acción Popular", "111", 1200, 900, Representantes);
-ArbolPartido.Agregar("P01", "Fuerza Popular", "112", 900, 800, Representantes);
+ArbolPartido.Agregar("P02", "Fuerza Popular", "112", 900, 800, Representantes);
 ArbolPartido.Agregar("P03", "Renovación Popular", "113", 1800, 1700, Representantes);
 ArbolPartido.Agregar("P04", "Paloma Popular", "114", 1000, 700, Representantes);
 ArbolPartido.Agregar("P05", "Perú Libre", "115", 100, 40, Representantes);
@@ -26,9 +26,9 @@ ArbolPartido.Agregar("P06", "Pueblo Libre", "116", 700, 400, Representantes);
 ArbolPartido.Agregar("P07", "País Libre", "117", 600, 200, Representantes);
 ArbolPartido.Agregar("P08", "APRA", "118", 100, 100, Representantes);
 ArbolPartido.Agregar("P09", "FREDEMO", "119", 2000, 1200, Representantes);
-ArbolPartido.Agregar("P010", "UE", "120", 1200, 1100, Representantes);
+ArbolPartido.Agregar("P10", "UE", "120", 1200, 1100, Representantes);
 #endregion
 
 CControlRepresentante nuevoControl_Representantes = new(Representantes);
 CControlPartido nuevoControl_Partido = new(ArbolPartido);   
-CMenu.MostrarMenu(nuevoControl_Partido, nuevoControl_Representantes, ArbolPartido);
+CMenu.EjecutarMenu(nuevoControl_Partido, nuevoControl_Representantes, ArbolPartido, Representantes);

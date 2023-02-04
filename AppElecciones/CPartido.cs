@@ -96,7 +96,7 @@ namespace AppElecciones
         private bool VerificarIdRepresentante(string idRepresentante, CArbolRepresentante arbolRepresentante)
         {
             CCola cola = arbolRepresentante.GenerarColaDeElementos();
-            if (!cola.EsVacia())
+            while (!cola.EsVacia())
             {
                 if (cola.Primero() is CRepresentante Representante && (Representante.Id == idRepresentante || Representante.Dni == idRepresentante))
                 {
