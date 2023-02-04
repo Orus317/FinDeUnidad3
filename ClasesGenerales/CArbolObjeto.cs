@@ -89,7 +89,15 @@ namespace ClasesGenerales
         }
         public object Buscar(object Objeto)
         {
-            return Arbol.SubArbol(Objeto).Raiz;
+            try
+            {
+                return Arbol.SubArbol(Objeto).Raiz;
+            }
+            catch (Exception)
+            {
+                return null;
+                throw;
+            }
         }
         public object Minimo()
         {
