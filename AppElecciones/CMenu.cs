@@ -3,8 +3,8 @@ namespace AppElecciones
 {
     public class CMenu
     {
-
-        public static void MostrarMenu(CControlPartido Partido, CControlRepresentante Representante, CArbolPartido ArbolPartido)
+        // Menú Principal
+        public static void MostrarMenu()
         {
             Console.WriteLine("========= Bibliteca =========");
             Console.WriteLine("1• Partido");
@@ -13,11 +13,37 @@ namespace AppElecciones
             Console.WriteLine("4• Salir");
             Console.WriteLine();
             Console.Write(" -- Ingrese la opción: ");
-            int Opcion = Utilidades.ValidarEntero("Debe ingresar un número del 1 al 4: ", 1, 5);
-            EjecutarOpcion(Opcion, Partido, Representante, ArbolPartido);
         }
 
-        public static void MenuReportes(CControlPartido Partido, CControlRepresentante Representante, CArbolPartido ArbolPartido)
+        public static void EjecutarMenu(CControlPartido partido, CControlRepresentante representante, CArbolPartido ArbolPartido)
+        {
+            int opcion = -1;
+            do
+            {
+                MostrarMenu();
+                opcion = Utilidades.ValidarEntero("Debe ingresar un número del 1 al 4: ", 1, 5);
+                switch (opcion)
+                {
+                case 1:
+                    partido.EjecutarMenu();
+                    break;
+                case 2:
+                    representante.EjecutarMenu();
+                    break;
+                case 3:
+                    EjecutarMenuReportes(partido, representante, ArbolPartido);
+                    break;
+                case 4:
+                    break;
+                default:
+                    break;
+                }
+            }
+            while (0 < opcion && opcion < 4);
+        }
+
+        // Menú de los reportes en pantalla
+        public static void MenuReportes()
         {
             Console.WriteLine("");
             Console.WriteLine("========= Reportes =========");
@@ -28,9 +54,14 @@ namespace AppElecciones
             Console.WriteLine("5. Salir ");
             Console.WriteLine();
             Console.Write(" -- Ingrese la opción: ");
+        }
+
+        public static void EjecutarMenuReportes(CControlPartido Partido, CControlRepresentante Representante, CArbolPartido ArbolPartido)
+        {
             int opcion;
             do
             {
+                MenuReportes();
                 opcion = Utilidades.ValidarEntero("Debe ingresar un número del 1 al 5: ", 1, 5);
                 switch (opcion)
                 {
@@ -46,39 +77,11 @@ namespace AppElecciones
                 case 4:
                     CReportes.ListarPartidosConVallaDeVotos(ArbolPartido);
                     break;
-                case 5:
-                    CMenu.MostrarMenu(Partido, Representante, ArbolPartido);
-                    break;
                 default:
                     break;
                 }
             }
             while (0 < opcion && opcion < 5);
         }
-
-        private static void EjecutarOpcion(int opcion, CControlPartido partido, CControlRepresentante representante, CArbolPartido ArbolPartido)
-        {
-            do
-            {
-                switch (opcion)
-                {
-                case 1:
-                    partido.Menu();
-                    break;
-                case 2:
-                    representante.Menu();
-                    break;
-                case 3:
-                    MenuReportes(partido, representante, ArbolPartido);
-                    break;
-                case 4:
-                    break;
-                default:
-                    break;
-                }
-            }
-            while (0 < opcion && opcion < 4);
-        }
     }
 }
-

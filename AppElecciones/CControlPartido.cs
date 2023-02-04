@@ -3,7 +3,7 @@ using ClasesGenerales;
 
 namespace AppElecciones
 {
-    public class CControlPartido 
+    public class CControlPartido
     {
         private CArbolPartido? _ArbolDePartidos;
         public CArbolPartido? ArbolDePartidos { get => _ArbolDePartidos; set => _ArbolDePartidos = value; }
@@ -11,7 +11,7 @@ namespace AppElecciones
         {
             ArbolDePartidos = inArbolDePartidos;
         }
-        public CControlPartido() 
+        public CControlPartido()
         {
             ArbolDePartidos = new();
         }
@@ -26,33 +26,34 @@ namespace AppElecciones
             Console.WriteLine("5. Salir ");
             Console.WriteLine();
             Console.Write(" -- Ingrese la opción: ");
-            Ejecutar(ArbolDePartidos);
         }
-        public void Ejecutar(CArbolPartido ArbolDePartidos)
+        public void EjecutarMenu()
         {
             int Opcion;
             do
             {
-                Opcion = Utilidades.ValidarEntero("Debe ingresar un número positivo", 1, int.MaxValue);
+                Menu();
+                Opcion = Utilidades.ValidarEntero("Debe ingresar un número entre 1 y 5", 1, 5);
                 switch (Opcion)
                 {
-                    case 1:
-                        ArbolDePartidos.Agregar();
-                        break;
-                    case 2:
-                        ArbolDePartidos.Eliminar();
-                        break; 
-                    case 3:
-                        ArbolDePartidos.Listar();
-                        break;
-                    case 4:
-                        ArbolDePartidos.Buscar();
-                        break;
-                    default:    
-                        break;
+                case 1:
+                    ArbolDePartidos.Agregar();
+                    break;
+                case 2:
+                    ArbolDePartidos.Eliminar();
+                    break;
+                case 3:
+                    ArbolDePartidos.Listar();
+                    break;
+                case 4:
+                    ArbolDePartidos.Buscar();
+                    break;
+                default:
+                    break;
                 }
-                Menu();
-            } while (0 < Opcion && Opcion < 5);
+                Console.WriteLine(Opcion);
+            }
+            while (0 < Opcion && Opcion < 5);
         }
     }
 }

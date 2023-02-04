@@ -29,14 +29,14 @@ namespace AppElecciones
             Console.WriteLine("5. Salir ");
             Console.WriteLine();
             Console.Write(" -- Ingrese la opción: ");
-            Ejecutar(ArbolDeRepresentantes);
         }
 
-        public void Ejecutar(CArbolRepresentante ArbolDeRepresentantes)
+        public void EjecutarMenu()
         {
             int Opcion;
             do
             {
+                Menu();
                 Opcion = Utilidades.ValidarEntero("Debe ingresar un número positivo", 1, int.MaxValue);
                 switch (Opcion)
                 {
@@ -55,7 +55,6 @@ namespace AppElecciones
                 default:
                     break;
                 }
-                Menu();
             }
             while (0 < Opcion && Opcion < 5);
         }
