@@ -51,34 +51,5 @@ namespace AppElecciones
             else
                 Console.WriteLine("No se encontró el elemento");
         }
-
-        public void PartidoPorDni()
-        {
-            Console.Write("DNI del representante: ");
-            string dni = Console.ReadLine();
-            deProcesarObjeto = delegate (object Objeto)
-            {
-                if (Objeto is CPartido Partido)
-                {
-                    if (Partido.Representante() == dni)
-                        Partido.Mostrar();
-                }
-            };
-            base.Listar();
-        }
-
-        public void nroFirmasValidasMayoraN()
-        {
-            Console.Write("Ingrese un número: ");
-            int N = int.Parse(Console.ReadLine());
-            deSeleccionarObjeto = delegate (object o)
-            {
-                CPartido _ = (CPartido)o;
-                return _.NroFirmasValidas >= N; 
-            };
-            CArbolAVL _ = GenerarSubArbolAVL();
-            CArbolPartido SubArbol = new(_);
-            SubArbol.Listar();
-        }
     }
 }

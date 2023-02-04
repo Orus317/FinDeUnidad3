@@ -31,7 +31,7 @@ namespace AppElecciones
                     representante.EjecutarMenu();
                     break;
                 case 3:
-                    EjecutarMenuReportes(partido, representante, ArbolPartido);
+                    EjecutarMenuReportes(partido, representante, ArbolPartido, arbolRepresentante);
                     break;
                 case 4:
                     break;
@@ -56,7 +56,7 @@ namespace AppElecciones
             Console.Write(" -- Ingrese la opción: ");
         }
 
-        public static void EjecutarMenuReportes(CControlPartido Partido, CControlRepresentante Representante, CArbolPartido ArbolPartido)
+        public static void EjecutarMenuReportes(CControlPartido Partido, CControlRepresentante Representante, CArbolPartido ArbolPartido, CArbolRepresentante ArbolRepresentante)
         {
             int opcion;
             do
@@ -66,13 +66,13 @@ namespace AppElecciones
                 switch (opcion)
                 {
                 case 1:
-                    ArbolPartido.nroFirmasValidasMayoraN();
+                    CReportes.NroFirmasValidasMayoraN(ArbolPartido);
                     break;
                 case 2:
                     CReportes.ListarPartidosPorOrdenDescendenteDeFirmas(ArbolPartido);
                     break;
                 case 3:
-                    ArbolPartido.PartidoPorDni();
+                    CReportes.PartidoPorDni(ArbolRepresentante, ArbolPartido);
                     break;
                 case 4:
                     CReportes.ListarPartidosConVallaDeVotos(ArbolPartido);

@@ -57,7 +57,6 @@ namespace AppElecciones
             {
                 Res.Mostrar();
             }
-
         }
         static public void ListarPartidosConVallaDeVotos(CArbolPartido ArbolPartido)
         {
@@ -90,6 +89,71 @@ namespace AppElecciones
             }
             // Se muestran todos los resultados en pantalla
             Aux.Listar();
+        }
+
+        public static void PartidoPorDni(CArbolRepresentante ArbolRepresentante, CArbolPartido ArbolPartido)
+        {
+            Console.Write("Ingrese el DNI del representante: ");
+            string dni = Console.ReadLine();
+            string IdRepresentante = "";
+            CCola cola = ArbolRepresentante.GenerarColaDeElementos();
+            while (!cola.EsVacia())
+            {
+                if (cola.Primero() is CRepresentante Representantes)
+                {
+                    if(dni == Representantes.Dni)
+                    {
+                        IdRepresentante = Representantes.Id;
+                    }
+                }
+                cola.Retirar();
+            }
+            if (IdRepresentante == "")
+                Console.WriteLine("No se encontró al representante de DNI {0}", dni);
+            CCola colaPartido = ArbolPartido.GenerarColaDeElementos();
+            while (!colaPartido.EsVacia())
+            {
+                if (colaPartido.Primero() is CPartido Partido)
+                {
+                    if (IdRepresentante == Partido.IdRepresentante)
+                    {
+                        Console.WriteLine("Partido representado: {0}", Partido.Nombre);
+                    }
+                }
+                colaPartido.Retirar();
+            }
+        }
+
+        static public void NroFirmasValidasMayoraN(CArbolPartido ArbolPartido)
+        {
+            CCola cola = ArbolPartido.GenerarColaDeElementos();
+            Console.Write("Ingrese el un número N: ");
+            int N = int.Parse(Console.ReadLine());
+            CArbolPartido Aux = new();
+            while (!cola.EsVacia())
+            {
+                if (cola.Primero() is CPartido Partido)
+                {
+                    if (Partido.NroFirmasValidas > N)
+                    {
+                        Console.WriteLine("Partido: {0}", Partido.Nombre);
+                        Console.WriteLine("Número de firmas válidas: {0}", Partido.NroFirmasValidas);
+                    }
+                }
+                cola.Retirar();
+            }
+            /*
+             * CCola colaAux = Aux.GenerarColaDeElementos();
+             * while (!colaAux.EsVacia())
+             * {
+             *     if (colaAux.Primero() is CPartido Partido)
+             *     {
+             *         Console.WriteLine("Partido: {0}", Partido.Nombre);
+             *         Console.WriteLine("Número de firmas válidas: {0}", Partido.NroFirmasValidas);
+             *     }
+             *     colaAux.Retirar();
+             */
+            // }
         }
     }
 }
