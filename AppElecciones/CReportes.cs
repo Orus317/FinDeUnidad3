@@ -63,7 +63,7 @@ namespace AppElecciones
             {
                 item.Mostrar();
             }
-        }  
+        }
         static public void ListarPartidosConVallaDeVotos(CArbolPartido ArbolPartido)
         {
             // Se crea el arbol auxiliar
@@ -128,24 +128,22 @@ namespace AppElecciones
                 {
                     if (Partido.NroFirmasValidas > N)
                     {
-                        Console.WriteLine("Partido: {0}", Partido.Nombre);
-                        Console.WriteLine("Número de firmas válidas: {0}", Partido.NroFirmasValidas);
+                        Aux.Agregar(Partido);
                     }
                 }
                 cola.Retirar();
             }
-            /*
-             * CCola colaAux = Aux.GenerarColaDeElementos();
-             * while (!colaAux.EsVacia())
-             * {
-             *     if (colaAux.Primero() is CPartido Partido)
-             *     {
-             *         Console.WriteLine("Partido: {0}", Partido.Nombre);
-             *         Console.WriteLine("Número de firmas válidas: {0}", Partido.NroFirmasValidas);
-             *     }
-             *     colaAux.Retirar();
-             */
-            // }
+            CCola colaAux = Aux.GenerarColaDeElementos();
+            while (!colaAux.EsVacia())
+            {
+                if (colaAux.Primero() is CPartido Partido)
+                {
+                    Console.WriteLine("========================");
+                    Console.WriteLine("Partido: {0}", Partido.Nombre);
+                    Console.WriteLine("Número de firmas válidas: {0}", Partido.NroFirmasValidas);
+                }
+                colaAux.Retirar();
+            }
         }
     }
 }
