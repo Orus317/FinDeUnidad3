@@ -1,4 +1,6 @@
-﻿namespace EstructurasDeDatos
+﻿using System.Reflection;
+
+namespace EstructurasDeDatos
 {
     public class CArbolBB
     {
@@ -213,12 +215,12 @@
                 return null;
             else
                 if (EsHijo(pRaiz))
-                    return this;
-                else
+                return this;
+            else
                     if (pRaiz.ToString().CompareTo(aRaiz.ToString()) < 0)
-                        return aSubArbolIzq != null ? aSubArbolIzq.Padre(pRaiz) : null;
-                    else
-                        return aSubArbolDer != null ? aSubArbolDer.Padre(pRaiz) : null;
+                return aSubArbolIzq != null ? aSubArbolIzq.Padre(pRaiz) : null;
+            else
+                return aSubArbolDer != null ? aSubArbolDer.Padre(pRaiz) : null;
         }
         public object? BuscarNodo(object Elemento)
         {
@@ -328,5 +330,35 @@
                 return 1 + (aSubArbolIzq == null ? 0 : aSubArbolIzq.NroNodos()) + (aSubArbolDer == null ? 0 : aSubArbolDer.NroNodos());
         }
         /* -------------------------------------------------------------- */
+        public void InOrden(Action<object> Modulo = null)
+        {
+            if (!EstaVacio())
+            {
+                //-- Recorrer Hijo Izq en InOrden
+                aSubArbolIzq?.InOrden(Modulo);
+                // -- Procesar la Raiz
+                if (Modulo == null)
+                    Console.WriteLine(aRaiz);
+                else
+                    Modulo(aRaiz);
+                //-- Recorrer Hijo Der en InOrden
+                aSubArbolDer?.InOrden(Modulo);
+            }
+        }
+        public void PostOrden(Action<object> Modulo = null)
+        {
+            if (aRaiz != null)
+            {
+                // ----- Procesar hijo Izq
+                aSubArbolIzq?.PostOrden(Modulo);
+                // ----- Procesar hijo Der
+                aSubArbolDer?.PostOrden(Modulo);
+                // ----- Procesar la raiz
+                if (Modulo == null)
+                    Console.WriteLine(aRaiz);
+                else
+                    Modulo(aRaiz);
+            }
+        }
     }
 }

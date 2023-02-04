@@ -95,13 +95,21 @@ namespace ClasesGenerales
         {
             return Arbol.Minimo();
         }
+        public object Maximo()
+        {
+            return Arbol.Maximo();
+        }
         public bool EstaVacio()
         {
             return Arbol.EstaVacio();
         }
-        public bool EstaBalanceado()
+        public void InOrden(Action<object> Modulo)
         {
-            return Arbol.EstaBalanceado();
+            Arbol.InOrden(Modulo);
+        }
+        public void PostOrden(Action<object> Modulo)
+        {
+            Arbol.PostOrden(Modulo);
         }
         #endregion
     }

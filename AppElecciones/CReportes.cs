@@ -1,4 +1,5 @@
-﻿using EstructurasDeDatos;
+﻿using System.Data;
+using EstructurasDeDatos;
 
 namespace AppElecciones
 {
@@ -9,85 +10,76 @@ namespace AppElecciones
         {
             private readonly string? _id;
             private readonly string? _NombrePartido;
-            private readonly int? _NroFirmasValidas;
-            public PartidoNroFirmas(string? id, string? nombrePartido, int? nroFirmasValidas)
+            private readonly int? _NroFirmasPresentadas;
+            public PartidoNroFirmas(string? id, string? nombrePartido, int? NroFirmasPresentadas)
             {
                 _id = id;
                 _NombrePartido = nombrePartido;
-                _NroFirmasValidas = nroFirmasValidas;
+                _NroFirmasPresentadas = NroFirmasPresentadas;
             }
 
-            public int? NroFirmasValidas => _NroFirmasValidas;
+            public int? NroFirmasPresentadas => _NroFirmasPresentadas;
 
             public void Mostrar()
             {
                 Console.WriteLine("================");
                 Console.WriteLine($"Id del partido: {_id}");
                 Console.WriteLine($"Nombre del partido: {_NombrePartido}");
-                Console.WriteLine($"Firmas Validas: {_NroFirmasValidas}");
+                Console.WriteLine($"Firmas presentadas: {_NroFirmasPresentadas}");
             }
             public override string ToString()
             {
-                return _NroFirmasValidas.ToString();
+                return _NroFirmasPresentadas.ToString();
+            }
+            public override bool Equals(object? obj)
+            {
+                if (obj is PartidoNroFirmas parti)
+                {
+                    return parti._id == _id;
+                }
+                return false;
             }
         }
         static public void ListarPartidosPorOrdenDescendenteDeFirmas(CArbolPartido ArbolPartido)
         {
-            string? id, nombrePartido;
-            int? nroFirmasValidas;
-            // Usamos una lista para facilitar el proceso de ordenamiento
+            // Se crea una lista auxiliar
             List<PartidoNroFirmas> Aux = new();
-            // Usamos una cola para facilitar el acceso a los elementos
-            CCola cola = ArbolPartido.GenerarColaDeElementos();
-            while (!cola.EsVacia())
+            // Se crea una función anónima que procesará cada elemento del arbol
+            Action<object> TransformarArbol = (obj) =>
             {
-                // Extraer el primer elemento y castearlo como un partido
-                CPartido _ = (CPartido)cola.Primero();
-                // Asignaciones
-                id = _.Id;
-                nombrePartido = _.Nombre;
-                nroFirmasValidas = _.NroFirmasValidas;
-                cola.Retirar();
-                // Se agrega el elemento la lista auxiliar
-                Aux.Add(new PartidoNroFirmas(id, nombrePartido, nroFirmasValidas));
-            }
-            // Se ordena la lista según el número de firmas
-            Aux = Aux.OrderBy(el => el.NroFirmasValidas).ToList();
-            foreach (PartidoNroFirmas Res in Aux)
+                if (obj is CPartido Partido)
+                {
+                    // Se agrega el elemento transformado a la lista
+                    PartidoNroFirmas objetoTransformado = new(Partido.Id, Partido.Nombre, Partido.NroFirmasPresentadas);
+                    Aux.Add(objetoTransformado);
+                }
+            };
+            // Se recorre el arbol aplicando el método anónimo
+            ArbolPartido.InOrden(TransformarArbol);
+            // Se ordena descendentemente en función de las firmas
+            Aux = Aux.OrderByDescending(el => el.NroFirmasPresentadas).ToList();
+            // Se procesa cada elemento
+            foreach (PartidoNroFirmas item in Aux)
             {
-                Res.Mostrar();
+                item.Mostrar();
             }
-        }
+        }  
         static public void ListarPartidosConVallaDeVotos(CArbolPartido ArbolPartido)
         {
-            // Se genera una cola con los elementos
-            CCola cola = ArbolPartido.GenerarColaDeElementos();
-            // Se declarar una variable para la suma total de firmas
-            int? totalFirmas = 0;
-            // Se calculan todas las firmas
-            while (!cola.EsVacia())
-            {
-                if (cola.Primero() is CPartido Partido)
-                {
-                    totalFirmas += Partido.NroFirmasPresentadas;
-                }
-                cola.Retirar();
-            }
-            // Se calcula la valla de las firmas
-            int? vallaDeFirmas = totalFirmas / 3;
             // Se crea el arbol auxiliar
             CArbolPartido Aux = new();
-            // Se vuelve a generar la cola de elementos
-            cola = ArbolPartido.GenerarColaDeElementos();
-            // Se agregan los partidos cuyo número de firmas válidas sea menor que la valla de firmas
-            while (!cola.EsVacia())
+            // Se genera la función anónima que agregará cada elemento si cumple la condición de tener un número de firmas válidas menor al tercio de firmas presentadas
+            Action<object> FiltroFirmas = (object Obj) =>
             {
-                if (cola.Primero() is CPartido Partido && Partido.NroFirmasValidas < vallaDeFirmas)
+                CPartido partidito = (CPartido)Obj;
+                if (Obj is CPartido Partido && (Partido.NroFirmasValidas < (Partido.NroFirmasPresentadas / 3)))
                 {
                     Aux.Agregar(Partido);
                 }
-            }
-            // Se muestran todos los resultados en pantalla
+            };
+            // Se recorre el arbol con la función anónima creada
+            ArbolPartido.InOrden(FiltroFirmas);
+            // Se lista el árbol filtrado
             Aux.Listar();
         }
 

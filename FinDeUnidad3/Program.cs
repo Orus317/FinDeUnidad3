@@ -17,10 +17,10 @@ Representantes.Agregar("120", "Do Santos", "Cuchitini", "Antonella", "23478535",
 
 #region Partidos predeterminados
 CArbolPartido ArbolPartido = new();
-ArbolPartido.Agregar("P01", "Acción Popular", "111", 1200, 900, Representantes);
-ArbolPartido.Agregar("P02", "Fuerza Popular", "112", 900, 800, Representantes);
-ArbolPartido.Agregar("P03", "Renovación Popular", "113", 1800, 1700, Representantes);
-ArbolPartido.Agregar("P04", "Paloma Popular", "114", 1000, 700, Representantes);
+ArbolPartido.Agregar("P01", "Acción Popular", "111", 2800, 900, Representantes);
+ArbolPartido.Agregar("P02", "Fuerza Popular", "112", 1900, 800, Representantes);
+ArbolPartido.Agregar("P03", "Renovación Popular", "113", 5800, 1700, Representantes);
+ArbolPartido.Agregar("P04", "Paloma Popular", "114", 8000, 700, Representantes);
 ArbolPartido.Agregar("P05", "Perú Libre", "115", 100, 40, Representantes);
 ArbolPartido.Agregar("P06", "Pueblo Libre", "116", 700, 400, Representantes);
 ArbolPartido.Agregar("P07", "País Libre", "117", 600, 200, Representantes);
