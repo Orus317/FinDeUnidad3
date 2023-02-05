@@ -63,7 +63,7 @@ namespace AppElecciones
             {
                 item.Mostrar();
             }
-        }  
+        }
         static public void ListarPartidosConVallaDeVotos(CArbolPartido ArbolPartido)
         {
             // Se crea el arbol auxiliar
@@ -87,26 +87,33 @@ namespace AppElecciones
         {
             Console.Write("Ingrese el DNI del representante: ");
             string dni = Console.ReadLine();
+            // Variable inicial
             string IdRepresentante = "";
+            // Accederemos a los elementos del árbol de representantes a traves de una cola 
             CCola cola = ArbolRepresentante.GenerarColaDeElementos();
             while (!cola.EsVacia())
-            {
+            { 
                 if (cola.Primero() is CRepresentante Representantes)
                 {
+                    // Verificamos si el Dni del representante en cuestión es igual del proporcionado por el usuario
                     if(dni == Representantes.Dni)
                     {
+                        // Almacenamos el Id del representante que se usará para encontral el partido al que representa 
                         IdRepresentante = Representantes.Id;
                     }
                 }
                 cola.Retirar();
             }
+            // Verificamos que se haya encontrado al representante
             if (IdRepresentante == "")
                 Console.WriteLine("No se encontró al representante de DNI {0}", dni);
+            // Accederemos a los elementos del árbol de partidos a traves de otra cola
             CCola colaPartido = ArbolPartido.GenerarColaDeElementos();
             while (!colaPartido.EsVacia())
             {
                 if (colaPartido.Primero() is CPartido Partido)
                 {
+                    // Econtramos al representante e imprimimos el partido al que representa
                     if (IdRepresentante == Partido.IdRepresentante)
                     {
                         Console.WriteLine("Partido representado: {0}", Partido.Nombre);
@@ -118,34 +125,37 @@ namespace AppElecciones
 
         static public void NroFirmasValidasMayoraN(CArbolPartido ArbolPartido)
         {
-            CCola cola = ArbolPartido.GenerarColaDeElementos();
             Console.Write("Ingrese el un número N: ");
             int N = int.Parse(Console.ReadLine());
+            // Accederemos a los elementos del árbol de partidos a traves de una cola
+            CCola cola = ArbolPartido.GenerarColaDeElementos();
+            // Generamos una arbol auxiliar en donde se guardarán los partidos cuyas firmas válidas sean mayores a N
             CArbolPartido Aux = new();
             while (!cola.EsVacia())
             {
                 if (cola.Primero() is CPartido Partido)
                 {
+                    // Agregamos los partidos cuyas firmas válidas sean mayores a N
                     if (Partido.NroFirmasValidas > N)
                     {
-                        Console.WriteLine("Partido: {0}", Partido.Nombre);
-                        Console.WriteLine("Número de firmas válidas: {0}", Partido.NroFirmasValidas);
+                        Aux.Agregar(Partido);
                     }
                 }
                 cola.Retirar();
             }
-            /*
-             * CCola colaAux = Aux.GenerarColaDeElementos();
-             * while (!colaAux.EsVacia())
-             * {
-             *     if (colaAux.Primero() is CPartido Partido)
-             *     {
-             *         Console.WriteLine("Partido: {0}", Partido.Nombre);
-             *         Console.WriteLine("Número de firmas válidas: {0}", Partido.NroFirmasValidas);
-             *     }
-             *     colaAux.Retirar();
-             */
-            // }
+            // Accederemos a los elementos del árbol auxiliar a traves de otra cola
+            CCola colaAux = Aux.GenerarColaDeElementos();
+            while (!colaAux.EsVacia())
+            {
+                if (colaAux.Primero() is CPartido Partido)
+                {
+                    // imprimimos la información requerida
+                    Console.WriteLine("========================");
+                    Console.WriteLine("Partido: {0}", Partido.Nombre);
+                    Console.WriteLine("Número de firmas válidas: {0}", Partido.NroFirmasValidas);
+                }
+                colaAux.Retirar();
+            }
         }
     }
 }

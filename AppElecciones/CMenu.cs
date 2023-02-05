@@ -7,8 +7,8 @@ namespace AppElecciones
         public static void MostrarMenu()
         {
             Console.WriteLine("========= Bibliteca =========");
-            Console.WriteLine("1• Partido");
-            Console.WriteLine("2• Representante");
+            Console.WriteLine("1• Partidos");
+            Console.WriteLine("2• Representantes");
             Console.WriteLine("3• Reportes");
             Console.WriteLine("4• Salir");
             Console.WriteLine();
@@ -21,7 +21,7 @@ namespace AppElecciones
             do
             {
                 MostrarMenu();
-                opcion = Utilidades.ValidarEntero("Debe ingresar un número del 1 al 4: ", 1, 5);
+                opcion = Utilidades.ValidarEntero("Debe ingresar un número del 1 al 4: ", 1, 4);
                 switch (opcion)
                 {
                 case 1:
