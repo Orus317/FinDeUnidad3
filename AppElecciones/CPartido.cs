@@ -95,7 +95,7 @@ namespace AppElecciones
         public string Partido(){
             return Nombre;
         }
-        private bool VerificarIdRepresentante(string idRepresentante, CArbolRepresentante arbolRepresentante)
+        private bool VerificarIdRepresentante(string idRepresentante, CArbolRepresentante arbolRepresentante, CArbolPartido arbolPartido )
         {
             int acc = 0;
             // Verficar que no exista un partido ya registrado con un IdRepresentante 
