@@ -37,7 +37,7 @@ namespace AppElecciones
                 switch (Opcion)
                 {
                 case 1:
-                    ArbolDePartidos.Agregar(arbolRepresentante);
+                    ArbolDePartidos.Agregar(arbolRepresentante, ArbolDePartidos);
                     break;
                 case 2:
                     ArbolDePartidos.Eliminar();

@@ -13,6 +13,7 @@ namespace AppElecciones
         private int? _NroFirmasPresentadas;
         private int? _NroFirmasValidas;
         private CArbolRepresentante? _ArbolRepresentante;
+        private CArbolPartido? _ArbolPartido;
         #endregion
         #region Propiedades
         public string? Nombre { get => _Nombre; set => _Nombre = value; }
@@ -20,13 +21,14 @@ namespace AppElecciones
         public int? NroFirmasPresentadas { get => _NroFirmasPresentadas; set => _NroFirmasPresentadas = value; }
         public int? NroFirmasValidas { get => _NroFirmasValidas; set => _NroFirmasValidas = value; }
         public CArbolRepresentante? ArbolRepresentante { get => _ArbolRepresentante; set => _ArbolRepresentante = value; }
+        public CArbolPartido? ArbolPartido { get => _ArbolPartido; set => _ArbolPartido = value; }
         #endregion
         #region Constructores
-        public CPartido(string? idPartido, string? nombre, string? idRepresentante, int? nroFirmasPresentadas, int? nroFirmasValidas, CArbolRepresentante arbolRepresentante)
+        public CPartido(string? idPartido, string? nombre, string? idRepresentante, int? nroFirmasPresentadas, int? nroFirmasValidas, CArbolRepresentante arbolRepresentante, CArbolPartido arbolPartido)
         {
             Id = idPartido;
             Nombre = nombre;
-            IdRepresentante = VerificarIdRepresentante(idRepresentante, arbolRepresentante) ? idRepresentante : "";
+            IdRepresentante = VerificarIdRepresentante(idRepresentante, arbolRepresentante, arbolPartido) ? idRepresentante : "";
             NroFirmasPresentadas = nroFirmasPresentadas;
             NroFirmasValidas = nroFirmasValidas;
             ArbolRepresentante = arbolRepresentante;
@@ -50,9 +52,9 @@ namespace AppElecciones
             Nombre = Console.ReadLine();
             Console.Write("Id del representante: ");
             IdRepresentante = Console.ReadLine();
-            while (!VerificarIdRepresentante(IdRepresentante, ArbolRepresentante))
+            while (!VerificarIdRepresentante(IdRepresentante, ArbolRepresentante, ArbolPartido))
             {
-                Console.WriteLine("-- No existe dicho id de representante en el árbol de representantes. Ingrese nuevamente el id");
+                Console.WriteLine("-- No existe dicho id de representante en el árbol de representantes o el representante ya está afiliado a un partido. Ingrese nuevamente el id");
                 Console.Write("Id del representante: ");
                 IdRepresentante = Console.ReadLine();
             }
@@ -93,18 +95,27 @@ namespace AppElecciones
         public string Partido(){
             return Nombre;
         }
-        private bool VerificarIdRepresentante(string idRepresentante, CArbolRepresentante arbolRepresentante)
+        private bool VerificarIdRepresentante(string idRepresentante, CArbolRepresentante arbolRepresentante, CArbolPartido arbolPartido)
         {
-            CCola cola = arbolRepresentante.GenerarColaDeElementos();
-            while (!cola.EsVacia())
+            int acc = 0;
+            // Verficar que no exista un partido ya registrado con un IdRepresentante 
+            Action<object> UnicidadRepresentante = (obj) =>
             {
-                if (cola.Primero() is CRepresentante Representante && (Representante.Id == idRepresentante || Representante.Dni == idRepresentante))
-                {
-                    return true;
-                }
-                cola.Retirar();
-            }
-            return false;
+                if (obj is CPartido Partido && Partido.IdRepresentante == IdRepresentante)
+                    acc++;
+            };
+            arbolPartido?.InOrden(UnicidadRepresentante);
+            // Recorrer el arbol con inorden
+            bool flag = false;
+            // Verficar que el representante exista en el arbol de representantes
+            Action<object> ExistenciaRepresentante = (obj) =>
+            {
+                if (obj is CRepresentante representante && representante.Id == idRepresentante)
+                    flag = true;
+            };
+            // Recorrer el arbol con inorden
+            arbolRepresentante.InOrden(ExistenciaRepresentante);
+            return acc == 0 && flag;
         }
 
         #endregion

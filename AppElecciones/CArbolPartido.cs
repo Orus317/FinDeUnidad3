@@ -11,16 +11,19 @@ namespace AppElecciones
         {
             base.Agregar(Obj);
         }
-        public void Agregar(CArbolRepresentante arbolRepresentante)
+        public void Agregar(CArbolRepresentante arbolRepresentante, CArbolPartido arbolPartido)
         {
-            CPartido _ = new();
-            _.ArbolRepresentante = arbolRepresentante;
+            CPartido _ = new()
+            {
+                ArbolRepresentante = arbolRepresentante,
+                ArbolPartido = arbolPartido
+            };
             _.Registrar();
             base.Agregar(_);
         }
-        public void Agregar(string idPartido, string nombrePartido, string idRepresentante, int nroFirmasPresentadas, int nroFirmasValidas, CArbolRepresentante arbolRepresentante)
+        public void Agregar(string idPartido, string nombrePartido, string idRepresentante, int nroFirmasPresentadas, int nroFirmasValidas, CArbolRepresentante arbolRepresentante, CArbolPartido arbolPartido)
         {
-            CPartido _ = new(idPartido, nombrePartido, idRepresentante, nroFirmasPresentadas, nroFirmasValidas, arbolRepresentante);
+            CPartido _ = new(idPartido, nombrePartido, idRepresentante, nroFirmasPresentadas, nroFirmasValidas, arbolRepresentante, arbolPartido);
             base.Agregar(_);
         }
         public void Eliminar()
