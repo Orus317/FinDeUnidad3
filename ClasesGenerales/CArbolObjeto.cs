@@ -39,7 +39,14 @@ namespace ClasesGenerales
         #region    OTROS     
         public virtual void Agregar(object Objeto)
         {
-            Arbol.Agregar(Objeto);
+            if (Buscar(Objeto) == null)
+            {
+                Arbol.Agregar(Objeto);
+            }
+            else
+            {
+                Console.WriteLine("El elemento ya está registrado");
+            }
         }
 
         // ==============================================================
@@ -87,11 +94,11 @@ namespace ClasesGenerales
         {
             Arbol.Eliminar(Objeto);
         }
-        public object Buscar(object Objeto)
+        public object? Buscar(object Objeto)
         {
             try
             {
-                return Arbol.SubArbol(Objeto).Raiz;
+                return Arbol?.SubArbol(Objeto)?.Raiz;
             }
             catch (Exception)
             {
