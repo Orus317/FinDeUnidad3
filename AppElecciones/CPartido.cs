@@ -89,12 +89,6 @@ namespace AppElecciones
             return base.Equals(Objeto);
         }
 
-        public string Representante(){
-            return IdRepresentante;
-        } 
-        public string Partido(){
-            return Nombre;
-        }
         private bool VerificarIdRepresentante(string idRepresentante, CArbolRepresentante arbolRepresentante, CArbolPartido arbolPartido )
         {
             int acc = 0;
